@@ -30,6 +30,7 @@ import dashboard.ios
 import dashboard.views
 import dataviz.d3_views
 import dataviz.views
+import ethos.views
 import external_bounties.views
 import faucet.views
 import gitcoinbot.views
@@ -66,6 +67,7 @@ urlpatterns = [
     url(r'^universe/(?P<issuenum>.*)/(?P<slug>.*)/?', external_bounties.views.external_bounties_show, name='universe'),
     url(r'^universe/?', external_bounties.views.external_bounties_index, name="universe_index"),
 
+    re_path(r'^onboard/?', dashboard.views.onboard, name='onboard'),
     url(r'^dashboard/?', dashboard.views.dashboard, name='dashboard'),
     url(r'^explorer/?', dashboard.views.dashboard, name='explorer'),
 
@@ -114,7 +116,12 @@ urlpatterns = [
     path('actions/tool/<int:tool_id>/voteDown', dashboard.views.vote_tool_down, name='vote_tool_down'),
     url(r'^tools/?', dashboard.views.toolbox, name='tools'),
     url(r'^gas/?', dashboard.views.gas, name='gas'),
+
+    # redeem coin
     url(r'^coin/redeem/(.*)/?', dashboard.views.redeem_coin, name='redeem'),
+
+    # EthOS
+    path('ethos/', include('ethos.urls', namespace='ethos')),
 
     # images
     re_path(r'^funding/embed/?', dashboard.embed.embed, name='embed'),
@@ -138,7 +145,7 @@ urlpatterns = [
     url(r'^help/portal?', retail.views.portal, name='portal'),
     url(r'^help/pilot?', retail.views.help_pilot, name='help_pilot'),
     url(r'^help/?', retail.views.help, name='help'),
-    url(r'^onboard/?', retail.views.onboard, name='onboard'),
+    url(r'^docs/onboard/?', retail.views.onboard, name='onboard_doc'),
     url(r'^extension/chrome?', retail.views.browser_extension_chrome, name='browser_extension_chrome'),
     url(r'^extension/firefox?', retail.views.browser_extension_firefox, name='browser_extension_firefox'),
     url(r'^extension/?', retail.views.browser_extension_chrome, name='browser_extension'),
